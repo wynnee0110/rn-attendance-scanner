@@ -1,98 +1,287 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { Ionicons } from "@expo/vector-icons";
+import { ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <View className="flex-1 bg-gray-50">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 120 }}
+      >
+        {/* Header */}
+        <View className="px-6 pt-16 pb-6">
+          <View className="flex-row items-center justify-between">
+            <View>
+              <Text className="text-sm font-medium text-gray-500">
+                Good afternoon,
+              </Text>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+              <Text className="mt-1 text-3xl font-bold text-gray-900">
+                Wayne 👋
+              </Text>
+            </View>
+
+            <View className="h-11 w-11 items-center justify-center rounded-full bg-gray-900">
+              <Text className="font-bold text-white">WO</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Scanner Status */}
+        <View className="mx-6 rounded-3xl bg-gray-900 p-5">
+          <View className="flex-row items-center justify-between">
+            <View className="flex-row items-center">
+              <View className="h-3 w-3 rounded-full bg-emerald-400" />
+
+              <Text className="ml-2 text-sm font-semibold text-white">
+                Scanner Online
+              </Text>
+            </View>
+
+            <Text className="text-xs text-gray-400">
+              SCANNER-001
+            </Text>
+          </View>
+
+          <Text className="mt-6 text-sm text-gray-400">
+            Today's attendance
+          </Text>
+
+          <View className="mt-1 flex-row items-end">
+            <Text className="text-4xl font-bold text-white">
+              186
+            </Text>
+
+            <Text className="mb-1 ml-2 text-sm text-gray-400">
+              / 200 attendees
+            </Text>
+          </View>
+
+          {/* Progress */}
+          <View className="mt-5 h-2 overflow-hidden rounded-full bg-gray-700">
+            <View
+              className="h-full rounded-full bg-emerald-400"
+              style={{ width: "93%" }}
+            />
+          </View>
+
+          <View className="mt-3 flex-row justify-between">
+            <Text className="text-xs text-gray-400">
+              93% attendance
+            </Text>
+
+            <Text className="text-xs text-gray-400">
+              14 remaining
+            </Text>
+          </View>
+        </View>
+
+        {/* Statistics */}
+        <View className="mx-6 mt-6">
+          <Text className="mb-3 text-lg font-bold text-gray-900">
+            Today's Stats
+          </Text>
+
+          <View className="flex-row gap-3">
+            {/* Scans */}
+            <View className="flex-1 rounded-3xl bg-white p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-xl bg-blue-50">
+                <Ionicons
+                  name="scan-outline"
+                  size={20}
+                  color="#2563EB"
+                />
+              </View>
+
+              <Text className="mt-4 text-2xl font-bold text-gray-900">
+                186
+              </Text>
+
+              <Text className="mt-1 text-xs text-gray-500">
+                Total Scans
+              </Text>
+            </View>
+
+            {/* Successful */}
+            <View className="flex-1 rounded-3xl bg-white p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
+                <Ionicons
+                  name="checkmark-circle-outline"
+                  size={20}
+                  color="#10B981"
+                />
+              </View>
+
+              <Text className="mt-4 text-2xl font-bold text-gray-900">
+                163
+              </Text>
+
+              <Text className="mt-1 text-xs text-gray-500">
+                Successful
+              </Text>
+            </View>
+          </View>
+
+          <View className="mt-3 flex-row gap-3">
+            {/* Duplicates */}
+            <View className="flex-1 rounded-3xl bg-white p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-xl bg-rose-50">
+                <Ionicons
+                  name="repeat-outline"
+                  size={20}
+                  color="#EF4444"
+                />
+              </View>
+
+              <Text className="mt-4 text-2xl font-bold text-gray-900">
+                23
+              </Text>
+
+              <Text className="mt-1 text-xs text-gray-500">
+                Duplicates
+              </Text>
+            </View>
+
+            {/* Rate */}
+            <View className="flex-1 rounded-3xl bg-white p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-xl bg-purple-50">
+                <Ionicons
+                  name="trending-up-outline"
+                  size={20}
+                  color="#7C3AED"
+                />
+              </View>
+
+              <Text className="mt-4 text-2xl font-bold text-gray-900">
+                98.2%
+              </Text>
+
+              <Text className="mt-1 text-xs text-gray-500">
+                Success Rate
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Recent Scans */}
+        <View className="mx-6 mt-6">
+          <View className="mb-3 flex-row items-center justify-between">
+            <Text className="text-lg font-bold text-gray-900">
+              Recent Scans
+            </Text>
+
+            <Text className="text-xs font-semibold text-gray-500">
+              View All
+            </Text>
+          </View>
+
+          <View className="overflow-hidden rounded-3xl bg-white">
+            {/* John */}
+            <View className="flex-row items-center border-b border-gray-100 p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-full bg-emerald-50">
+                <Ionicons
+                  name="checkmark"
+                  size={20}
+                  color="#10B981"
+                />
+              </View>
+
+              <View className="ml-3 flex-1">
+                <Text className="font-semibold text-gray-900">
+                  John Doe
+                </Text>
+
+                <Text className="mt-1 text-xs text-emerald-600">
+                  Attendance recorded
+                </Text>
+              </View>
+
+              <Text className="text-xs text-gray-400">
+                2:41 PM
+              </Text>
+            </View>
+
+            {/* Maria */}
+            <View className="flex-row items-center border-b border-gray-100 p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-full bg-emerald-50">
+                <Ionicons
+                  name="checkmark"
+                  size={20}
+                  color="#10B981"
+                />
+              </View>
+
+              <View className="ml-3 flex-1">
+                <Text className="font-semibold text-gray-900">
+                  Maria Santos
+                </Text>
+
+                <Text className="mt-1 text-xs text-emerald-600">
+                  Attendance recorded
+                </Text>
+              </View>
+
+              <Text className="text-xs text-gray-400">
+                2:39 PM
+              </Text>
+            </View>
+
+            {/* Alex */}
+            <View className="flex-row items-center p-4">
+              <View className="h-10 w-10 items-center justify-center rounded-full bg-rose-50">
+                <Ionicons
+                  name="alert"
+                  size={20}
+                  color="#EF4444"
+                />
+              </View>
+
+              <View className="ml-3 flex-1">
+                <Text className="font-semibold text-gray-900">
+                  Alex Cruz
+                </Text>
+
+                <Text className="mt-1 text-xs text-rose-500">
+                  Already scanned
+                </Text>
+              </View>
+
+              <Text className="text-xs text-gray-400">
+                2:37 PM
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Quick Info */}
+        <View className="mx-6 mt-6 rounded-3xl bg-white p-5">
+          <View className="flex-row items-center">
+            <View className="h-10 w-10 items-center justify-center rounded-xl bg-gray-100">
+              <Ionicons
+                name="location-outline"
+                size={20}
+                color="#111827"
+              />
+            </View>
+
+            <View className="ml-3 flex-1">
+              <Text className="text-xs text-gray-400">
+                Current Location
+              </Text>
+
+              <Text className="mt-1 font-semibold text-gray-900">
+                Main Entrance
+              </Text>
+            </View>
+
+            <View className="rounded-full bg-emerald-50 px-3 py-1.5">
+              <Text className="text-xs font-semibold text-emerald-600">
+                Active
+              </Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
