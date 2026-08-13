@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -21,17 +21,21 @@ export default function TabLayout() {
 
           backgroundColor: "#FFFFFF",
           borderRadius: 32,
-          borderTopWidth: 0,
+          borderWidth: 1,
+          borderColor: "rgba(0, 0, 0, 0.08)",
 
-          elevation: 6,
+          elevation: 10,
 
-          shadowColor: "#000",
+          shadowColor: "#000000",
           shadowOffset: {
             width: 0,
-            height: 3,
+            height: 6,
           },
-          shadowOpacity: 0.12,
-          shadowRadius: 8,
+          shadowOpacity: 0.16,
+          shadowRadius: 12,
+          ...(Platform.OS === "web"
+            ? ({ boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.12), 0px 2px 6px rgba(0, 0, 0, 0.06)" } as any)
+            : {}),
         },
 
         // TAB SPACING
@@ -103,11 +107,25 @@ export default function TabLayout() {
 
                 borderRadius: 34,
 
-                // No border / outline
                 backgroundColor: "#FFFFFF",
+
+                borderWidth: 1,
+                borderColor: "rgba(0, 0, 0, 0.06)",
 
                 justifyContent: "center",
                 alignItems: "center",
+
+                elevation: 10,
+                shadowColor: "#000000",
+                shadowOffset: {
+                  width: 0,
+                  height: 6,
+                },
+                shadowOpacity: 0.16,
+                shadowRadius: 10,
+                ...(Platform.OS === "web"
+                  ? ({ boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.12)" } as any)
+                  : {}),
               }}
             >
               {/* Scanner Button */}
@@ -117,8 +135,7 @@ export default function TabLayout() {
                   height: 50,
                   borderRadius: 25,
 
-                  // Circle stays the same
-                  backgroundColor: "#F3F4F6",
+                  backgroundColor: focused ? "#111827" : "#F3F4F6",
 
                   justifyContent: "center",
                   alignItems: "center",
@@ -127,9 +144,7 @@ export default function TabLayout() {
                 <Ionicons
                   name={focused ? "scan" : "scan-outline"}
                   size={24}
-
-                  // ONLY ICON COLOR CHANGES
-                  color={focused ? "#111827" : "#6B7280"}
+                  color={focused ? "#FFFFFF" : "#4B5563"}
                 />
               </View>
             </View>

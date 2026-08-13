@@ -12,12 +12,8 @@ export default function HomeScreen() {
         <View className="px-6 pt-16 pb-6">
           <View className="flex-row items-center justify-between">
             <View>
-              <Text className="text-sm font-medium text-gray-500">
-                Good afternoon,
-              </Text>
-
               <Text className="mt-1 text-3xl font-bold text-gray-900">
-                Wayne 👋
+                Volunteer
               </Text>
             </View>
 
