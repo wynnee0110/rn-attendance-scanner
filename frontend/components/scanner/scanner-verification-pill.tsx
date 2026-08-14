@@ -24,8 +24,8 @@ export function ScannerVerificationPill({
                 zIndex: 10,
             }}
             className={`flex-row items-center px-4 py-3 rounded-full border shadow-lg ${isDuplicate
-                    ? "bg-rose-50 border-rose-200"
-                    : "bg-white border-gray-100"
+                ? "bg-rose-50 border-rose-200"
+                : "bg-white border-gray-100"
                 }`}
         >
             {/* Status Icon */}

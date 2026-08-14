@@ -1,6 +1,7 @@
-import ScannerHeaderPill from "@/components/home/scanner-header-pill";
+import HomeHeaderPill from "@/components/home/home-header-pill";
+import HomeStats from "@/components/home/home-stats";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
@@ -23,50 +24,10 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Scanner */}
-        <ScannerHeaderPill />
+        <HomeHeaderPill />
 
-        {/* Scan Button */}
-        <View className="mx-6 mt-5">
-          <Pressable className="h-16 flex-row items-center justify-center rounded-2xl bg-emerald-500 active:opacity-80">
-            <Ionicons name="scan-outline" size={24} color="white" />
-            <Text className="ml-2 text-base font-bold text-white">
-              Scan QR Code
-            </Text>
-          </Pressable>
-        </View>
+        <HomeStats />
 
-        {/* Stats */}
-        <View className="mx-6 mt-6">
-          <View className="flex-row gap-3">
-            <View className="flex-1 rounded-2xl bg-white p-4">
-              <Text className="text-2xl font-bold text-gray-900">
-                186
-              </Text>
-              <Text className="mt-1 text-xs text-gray-500">
-                Scans
-              </Text>
-            </View>
-
-            <View className="flex-1 rounded-2xl bg-white p-4">
-              <Text className="text-2xl font-bold text-emerald-500">
-                163
-              </Text>
-              <Text className="mt-1 text-xs text-gray-500">
-                Successful
-              </Text>
-            </View>
-
-            <View className="flex-1 rounded-2xl bg-white p-4">
-              <Text className="text-2xl font-bold text-rose-500">
-                23
-              </Text>
-              <Text className="mt-1 text-xs text-gray-500">
-                Duplicate
-              </Text>
-            </View>
-          </View>
-        </View>
 
         {/* Recent Scans */}
         <View className="mx-6 mt-6">

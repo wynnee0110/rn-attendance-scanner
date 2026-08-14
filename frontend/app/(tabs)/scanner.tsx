@@ -126,11 +126,7 @@ export default function ScannerScreen() {
       />
 
       {/* White Theme Manual Entry Pill */}
-      <ScannerManualVerificationButton
-        onPress={() => {
-          alert("Manual Entry Pressed");
-        }}
-      />
+      <ScannerManualVerificationButton />
     </View>
   );
 }

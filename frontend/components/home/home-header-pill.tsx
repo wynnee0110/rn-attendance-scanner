@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function ScannerHeaderPill() {
+export default function HomeHeaderPill() {
 
     return (
         <>
