@@ -100,32 +100,17 @@ export default function TabLayout() {
             <View
               style={{
                 position: "absolute",
-                top: -22,
+                top: -18,
 
-                width: 68,
-                height: 68,
+                width: 60,
+                height: 60,
 
-                borderRadius: 34,
+                borderRadius: 30,
 
                 backgroundColor: "#FFFFFF",
 
-                borderWidth: 1,
-                borderColor: "rgba(0, 0, 0, 0.06)",
-
                 justifyContent: "center",
                 alignItems: "center",
-
-                elevation: 10,
-                shadowColor: "#000000",
-                shadowOffset: {
-                  width: 0,
-                  height: 6,
-                },
-                shadowOpacity: 0.16,
-                shadowRadius: 10,
-                ...(Platform.OS === "web"
-                  ? ({ boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.12)" } as any)
-                  : {}),
               }}
             >
               {/* Scanner Button */}
