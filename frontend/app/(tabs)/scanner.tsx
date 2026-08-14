@@ -3,7 +3,7 @@ import { Button, Text, View } from "react-native";
 import { CameraView, BarcodeScanningResult, useCameraPermissions } from "expo-camera";
 import { ScannerOverlay } from "@/components/scanner/scanner-overlay";
 import { ScannerVerificationPill } from "@/components/scanner/scanner-verification-pill";
-import { ScannerManualVerificationPill } from "@/components/scanner/scanner-manual-verfication-pill";
+import { ScannerManualVerificationButton } from "@/components/scanner/scanner-manual-verfication-button";
 
 export default function ScannerScreen() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -14,6 +14,7 @@ export default function ScannerScreen() {
     isDuplicate: false,
   });
   const [lastScannedCode, setLastScannedCode] = useState<string | null>(null);
+  const [layout, setLayout] = useState<{ width: number; height: number } | null>(null);
 
   if (!permission) {
     return <View className="flex-1 bg-black" />;
@@ -29,6 +30,49 @@ export default function ScannerScreen() {
   }
 
   const handleBarcodeScanned = (result: BarcodeScanningResult) => {
+    // Restrict scanning to inside the highlighted center viewfinder box (256x256)
+    if (layout && layout.width > 0 && layout.height > 0) {
+      const boxSize = 256;
+      const boxMinX = (layout.width - boxSize) / 2;
+      const boxMaxX = (layout.width + boxSize) / 2;
+      const boxMinY = (layout.height - boxSize) / 2;
+      const boxMaxY = (layout.height + boxSize) / 2;
+      const tolerance = 40; // margin allowance around box border
+
+      let qrX: number | null = null;
+      let qrY: number | null = null;
+
+      if (result.cornerPoints && result.cornerPoints.length > 0) {
+        const sumX = result.cornerPoints.reduce((acc, pt) => acc + pt.x, 0);
+        const sumY = result.cornerPoints.reduce((acc, pt) => acc + pt.y, 0);
+        qrX = sumX / result.cornerPoints.length;
+        qrY = sumY / result.cornerPoints.length;
+      } else if (result.bounds) {
+        const { origin, size } = result.bounds;
+        qrX = origin.x + size.width / 2;
+        qrY = origin.y + size.height / 2;
+      }
+
+      if (qrX !== null && qrY !== null) {
+        // If coordinates are normalized (0..1 range), scale to layout pixels
+        if (qrX <= 1 && qrY <= 1) {
+          qrX *= layout.width;
+          qrY *= layout.height;
+        }
+
+        const isInside =
+          qrX >= boxMinX - tolerance &&
+          qrX <= boxMaxX + tolerance &&
+          qrY >= boxMinY - tolerance &&
+          qrY <= boxMaxY + tolerance;
+
+        if (!isInside) {
+          // Ignore QR codes detected outside the highlighted viewfinder box
+          return;
+        }
+      }
+    }
+
     const code = result.data || "Unknown Attendee";
 
     // Avoid triggering multiple scans of the same physical QR code in the same instant
@@ -51,7 +95,14 @@ export default function ScannerScreen() {
   };
 
   return (
-    <View style={{ flex: 1 }} className="bg-black relative">
+    <View
+      style={{ flex: 1 }}
+      className="bg-black relative"
+      onLayout={(e) => {
+        const { width, height } = e.nativeEvent.layout;
+        setLayout({ width, height });
+      }}
+    >
       <CameraView
         style={{ flex: 1 }}
         facing="back"
@@ -75,7 +126,7 @@ export default function ScannerScreen() {
       />
 
       {/* White Theme Manual Entry Pill */}
-      <ScannerManualVerificationPill
+      <ScannerManualVerificationButton
         onPress={() => {
           alert("Manual Entry Pressed");
         }}

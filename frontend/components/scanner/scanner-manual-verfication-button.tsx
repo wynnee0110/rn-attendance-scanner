@@ -2,13 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
-export interface ScannerManualVerificationPillProps {
+export interface ScannerManualVerificationButtonProps {
     onPress?: () => void;
 }
 
-export function ScannerManualVerificationPill({
+export function ScannerManualVerificationButton({
     onPress,
-}: ScannerManualVerificationPillProps) {
+}: ScannerManualVerificationButtonProps) {
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -23,3 +23,5 @@ export function ScannerManualVerificationPill({
         </TouchableOpacity>
     );
 }
+
+export const ScannerManualVerificationPill = ScannerManualVerificationButton;

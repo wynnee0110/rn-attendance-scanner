@@ -15,8 +15,8 @@ export default function ScannerHeaderPill() {
                     </View>
 
                     <Text className="text-xs text-gray-500">
+                        SCANNER-001
                     </Text>
-                    SCANNER-001
                 </View>
 
                 <Text className="mt-6 text-sm text-gray-400">
